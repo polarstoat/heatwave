@@ -5,9 +5,9 @@ using UnityEngine;
 public class WaterNeeders : MonoBehaviour {
 
 
-    protected int currentTemp = 0;
-    protected int witherTemp = 0;
-    protected int maxTemp = 0;
+    protected float currentTemp = 0;
+    protected float witherTemp = 0;
+    protected float maxTemp = 0;
     public Sprite normal;
     public Sprite wither;
     public Sprite dead;
@@ -20,10 +20,10 @@ public class WaterNeeders : MonoBehaviour {
 
 
     // Update is called once per frame
-    void  Update()
+    private void FixedUpdate()
     {
         currentTemp++;
-        while (isLive == true)
+        if (isLive == true)
         {
             DecayState();
         }
@@ -46,11 +46,11 @@ public class WaterNeeders : MonoBehaviour {
         }
     }
 
-    protected virtual void SetWitherTemp(int x)
+    protected virtual void SetWitherTemp(float x)
     {
         witherTemp = x;
     }
-    protected virtual void SetMaxTemp(int x)
+    protected virtual void SetMaxTemp(float x)
     {
         maxTemp = x;
     }
