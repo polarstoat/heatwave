@@ -39,15 +39,8 @@ public class WaterNeeders : MonoBehaviour {
             //this doesnt really need to be its own function at this point, but other stuff might be added to being watered
             getWatered();
         }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            getATastyDrink = true;
-        }
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            getATastyDrink = false;
-        }
 
+        getATastyDrink = Input.GetKey("f") ? true : false;
     }
 
     protected virtual void DecayState()
