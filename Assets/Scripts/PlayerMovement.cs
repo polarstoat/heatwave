@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    public float Speed;
+    public float Speed = 20;
 
     private void FixedUpdate()
     {
