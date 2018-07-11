@@ -31,13 +31,24 @@ public class WaterNeeders : MonoBehaviour {
         currentTemp++;
         if (isLive == true)
         {
+            //check to see what state it is im (normal, withered or dead) It then loads the right sprite. Sprite to be changed with animation state some time in the future
             DecayState();
         }
         if (getATastyDrink == true)
         {
-
+            //this doesnt really need to be its own function at this point, but other stuff might be added to being watered
+            getWatered();
         }
-	}
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            getATastyDrink = true;
+        }
+        if (Input.GetKeyUp(KeyCode.F))
+        {
+            getATastyDrink = false;
+        }
+
+    }
 
     protected virtual void DecayState()
     {
@@ -55,7 +66,7 @@ public class WaterNeeders : MonoBehaviour {
             isLive = false;
         }
     }
-
+    //So the children can set there decay values values
     protected virtual void SetWitherTemp(float x)
     {
         witherTemp = x;
@@ -67,6 +78,7 @@ public class WaterNeeders : MonoBehaviour {
 
     protected void getWatered ()
     {
+        //refreshes the temp
         currentTemp = 0;
     }
 

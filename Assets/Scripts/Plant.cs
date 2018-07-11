@@ -12,6 +12,7 @@ public class Plant : WaterNeeders
 
     void Start()
     {
+        // This is so the input comes out in seconds, making it easier for humans to use
      witherCalc = witherSeconds / Time.fixedDeltaTime;
      healthCalc = healthSeconds / Time.fixedDeltaTime;
      SetWitherTemp(witherCalc);
