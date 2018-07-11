@@ -5,10 +5,20 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     public float speed = 0.25f;
+    private float xMove = 0;
+    private float yMove = 0;
+  
 
-    private void FixedUpdate()
+
+    private void Start()
     {
-        var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-        transform.position += move * speed;
+
     }
+     private void FixedUpdate()
+     {
+         var move = new Vector3(xMove, yMove, 0);
+         transform.position += move * speed;
+     } 
+
+    
 }
