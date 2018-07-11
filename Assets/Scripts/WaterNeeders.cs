@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class WaterNeeders : MonoBehaviour {
 
-
+    //messaures the current temp
     protected float currentTemp = 0;
+    //the temp where the water needer will wither
     protected float witherTemp = 0;
+    //the temp wehre the water needer will die a horrible death
     protected float maxTemp = 0;
+    
     public Sprite normal;
     public Sprite wither;
     public Sprite dead;
+ 
     protected bool isLive = true;
+    //bool for checking if they are getting water
+    protected bool getATastyDrink = false;
 	// Use this for initialization
 	void Start ()
     {
@@ -26,6 +32,10 @@ public class WaterNeeders : MonoBehaviour {
         if (isLive == true)
         {
             DecayState();
+        }
+        if (getATastyDrink == true)
+        {
+
         }
 	}
 
@@ -55,5 +65,9 @@ public class WaterNeeders : MonoBehaviour {
         maxTemp = x;
     }
 
+    protected void getWatered ()
+    {
+        currentTemp = 0;
+    }
 
 }

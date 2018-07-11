@@ -12,8 +12,8 @@ public class Plant : WaterNeeders
 
     void Start()
     {
-     witherCalc = witherSeconds * Time.fixedDeltaTime;
-     healthCalc = healthSeconds * Time.fixedDeltaTime;
+     witherCalc = witherSeconds / Time.fixedDeltaTime;
+     healthCalc = healthSeconds / Time.fixedDeltaTime;
      SetWitherTemp(witherCalc);
      SetMaxTemp(healthCalc);
     }
