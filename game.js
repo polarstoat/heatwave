@@ -30,15 +30,35 @@ function create() {
     repeat: -1,
   });
 
+  this.anims.create({
+    key: 'wilt',
+    frames: this.anims.generateFrameNumbers('plant', { start: 3, end: 5 }),
+    frameRate: 10,
+    repeat: -1,
+  });
+
+  this.anims.create({
+    key: 'dead',
+    frames: { key: 'plant', frame: 6 },
+    frameRate: 10,
+    repeat: -1,
+  });
+
   this.physics.add.sprite(400, 400, 'plant').anims.play('alive');
   this.physics.add.sprite(130, 80, 'plant').anims.play('alive');
   this.physics.add.sprite(166, 611, 'plant').anims.play('alive');
   this.physics.add.sprite(0, -12, 'plant').anims.play('alive');
   this.physics.add.sprite(831, 10, 'plant').anims.play('alive');
   this.physics.add.sprite(83, 300, 'plant').anims.play('alive');
+  this.physics.add.sprite(300, 10, 'plant').anims.play('wilt');
+  this.physics.add.sprite(250, 500, 'plant').anims.play('wilt');
+  // this.physics.add.sprite(140, 410, 'plant').anims.play('dead');
 
   player = this.physics.add.sprite(200, 200, 'player-down');
   player.setCollideWorldBounds(true);
+
+  this.physics.world.bounds.width = 3000;
+  this.physics.world.bounds.height = 2000;
 
   this.anims.create({
     key: 'walk-down',
@@ -70,7 +90,7 @@ function create() {
 
   this.cameras.main.startFollow(player, true, 0.05, 0.05);
 
-  console.dir(this.cameras.main);
+  // console.dir(this.cameras.main);
 }
 
 function update() {
@@ -100,6 +120,7 @@ function update() {
     player.setVelocityX(0);
     player.setVelocityY(0);
     player.anims.stop(true, true);
+    // this.cameras.main.shake(500);
   }
 }
 
