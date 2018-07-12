@@ -1,22 +1,22 @@
 {
-  "name": "heatwave",
+  "name": "thirsty-plants",
   "version": "1.0.0",
-  "description": "A game made for the Develop Game Jam 2018. Made by Tallin Aylward and Spike Padley.",
+  "description": "A game made in 24 hours for Develop Game Jam 2018",
   "main": "game.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/polarstoat/heatwave.git"
+    "url": "git+https://github.com/polarstoat/thirsty-plants.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/polarstoat/heatwave/issues"
+    "url": "https://github.com/polarstoat/thirsty-plants/issues"
   },
-  "homepage": "https://github.com/polarstoat/heatwave#readme",
+  "homepage": "https://github.com/polarstoat/thirsty-plants#readme",
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
