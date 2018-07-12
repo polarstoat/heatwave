@@ -124,6 +124,7 @@ function update() {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 const game = new Phaser.Game({
   type: Phaser.AUTO,
   width: 800,
