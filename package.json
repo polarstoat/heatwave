@@ -5,6 +5,7 @@
   "main": "game.js",
   "scripts": {
     "check-links": "markdown-link-check ./README.md",
+    "start": "browser-sync . -w --no-notify --no-ui",
     "test": "npm run check-links"
   },
   "repository": {
@@ -19,6 +20,7 @@
   },
   "homepage": "https://github.com/polarstoat/thirsty-plants#readme",
   "devDependencies": {
+    "browser-sync": "^2.24.5",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0",
