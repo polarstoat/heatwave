@@ -4,7 +4,8 @@
   "description": "A game made in 24 hours for Develop Game Jam 2018",
   "main": "game.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "check-links": "markdown-link-check ./README.md",
+    "test": "npm run check-links"
   },
   "repository": {
     "type": "git",
@@ -20,7 +21,8 @@
   "devDependencies": {
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-plugin-import": "^2.13.0"
+    "eslint-plugin-import": "^2.13.0",
+    "markdown-link-check": "^3.6.2"
   },
   "dependencies": {}
 }
