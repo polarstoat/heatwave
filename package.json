@@ -1,0 +1,20 @@
+{
+  "name": "heatwave",
+  "version": "1.0.0",
+  "description": "A game made for the Develop Game Jam 2018. Made by Tallin Aylward and Spike Padley.",
+  "main": "game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polarstoat/heatwave.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/polarstoat/heatwave/issues"
+  },
+  "homepage": "https://github.com/polarstoat/heatwave#readme"
+}
