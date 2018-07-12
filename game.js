@@ -39,7 +39,7 @@ function create() {
 
   this.anims.create({
     key: 'dead',
-    frames: { key: 'plant', frame: 6 },
+    frames: [{ key: 'plant', frame: 6 }],
     frameRate: 10,
     repeat: -1,
   });
@@ -52,7 +52,7 @@ function create() {
   this.physics.add.sprite(83, 300, 'plant').anims.play('alive');
   this.physics.add.sprite(300, 10, 'plant').anims.play('wilt');
   this.physics.add.sprite(250, 500, 'plant').anims.play('wilt');
-  // this.physics.add.sprite(140, 410, 'plant').anims.play('dead');
+  this.physics.add.sprite(140, 410, 'plant').anims.play('dead');
 
   player = this.physics.add.sprite(200, 200, 'player-down');
   player.setCollideWorldBounds(true);
@@ -83,7 +83,7 @@ function create() {
 
   this.anims.create({
     key: 'idle',
-    frames: { key: 'player-down', frame: 0 },
+    frames: [{ key: 'player-down', frame: 0 }],
   });
 
   // this.cameras.main.setZoom(1.25);
@@ -119,7 +119,7 @@ function update() {
   } else {
     player.setVelocityX(0);
     player.setVelocityY(0);
-    player.anims.stop(true, true);
+    player.anims.play('idle');
     // this.cameras.main.shake(500);
   }
 }
