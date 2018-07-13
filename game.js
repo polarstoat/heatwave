@@ -13,67 +13,72 @@ function preload() {
   });
 }
 
-function create() {
-  // Define animations
+// 'self' is the Phaser scene we attach the animations to
+function defineAnimations(self) {
   const walkAnimFrameRate = 10;
   const walkAnimRepeat = -1;
 
-  this.anims.create({
+  self.anims.create({
     key: 'player-walk-down',
     frames: [
-      ...this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
+      ...self.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
       { key: 'player', frame: 0 },
-      ...this.anims.generateFrameNumbers('player', { start: 4, end: 6 }),
+      ...self.anims.generateFrameNumbers('player', { start: 4, end: 6 }),
     ],
     frameRate: walkAnimFrameRate,
     repeat: walkAnimRepeat,
   });
 
-  this.anims.create({
+  self.anims.create({
     key: 'player-walk-left',
     frames: [
-      ...this.anims.generateFrameNumbers('player', { start: 16, end: 19 }),
+      ...self.anims.generateFrameNumbers('player', { start: 16, end: 19 }),
       { key: 'player', frame: 16 },
-      ...this.anims.generateFrameNumbers('player', { start: 20, end: 22 }),
+      ...self.anims.generateFrameNumbers('player', { start: 20, end: 22 }),
     ],
     frameRate: walkAnimFrameRate,
     repeat: walkAnimRepeat,
   });
 
-  this.anims.create({
+  self.anims.create({
     key: 'player-walk-up',
     frames: [
-      ...this.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
+      ...self.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
       { key: 'player', frame: 8 },
-      ...this.anims.generateFrameNumbers('player', { start: 12, end: 14 }),
+      ...self.anims.generateFrameNumbers('player', { start: 12, end: 14 }),
     ],
     frameRate: walkAnimFrameRate,
     repeat: walkAnimRepeat,
   });
 
-  this.anims.create({
+  self.anims.create({
     key: 'player-idle',
     frames: [{ key: 'player', frame: 0 }],
   });
 
-  this.anims.create({
+  self.anims.create({
     key: 'plant-alive',
-    frames: this.anims.generateFrameNumbers('plant', { start: 0, end: 2 }),
+    frames: self.anims.generateFrameNumbers('plant', { start: 0, end: 2 }),
     frameRate: 10,
     repeat: -1,
   });
 
-  this.anims.create({
+  self.anims.create({
     key: 'plant-wilt',
-    frames: this.anims.generateFrameNumbers('plant', { start: 3, end: 5 }),
+    frames: self.anims.generateFrameNumbers('plant', { start: 3, end: 5 }),
     frameRate: 10,
     repeat: -1,
   });
 
-  this.anims.create({
+  self.anims.create({
     key: 'plant-dead',
     frames: [{ key: 'plant', frame: 6 }],
   });
+}
+
+function create() {
+  // Define animations
+  defineAnimations(this);
 
   this.add.image(0, 0, 'background');
 
