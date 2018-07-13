@@ -1,14 +1,6 @@
 function preload() {
   this.load.image('background', 'sprites/background.png');
-  this.load.spritesheet('player-down', 'sprites/player-down.png', {
-    frameWidth: 64,
-    frameHeight: 96,
-  });
-  this.load.spritesheet('player-left', 'sprites/player-left.png', {
-    frameWidth: 64,
-    frameHeight: 96,
-  });
-  this.load.spritesheet('player-up', 'sprites/player-up.png', {
+  this.load.spritesheet('player', 'sprites/player.png', {
     frameWidth: 64,
     frameHeight: 96,
   });
@@ -60,30 +52,45 @@ function create() {
   this.physics.world.bounds.width = 3000;
   this.physics.world.bounds.height = 2000;
 
+  const walkAnimFrameRate = 10;
+  const walkAnimRepeat = -1;
+
   this.anims.create({
     key: 'walk-down',
-    frames: this.anims.generateFrameNumbers('player-down', { start: 0, end: 3 }).concat({ key: 'player-down', frame: 0 }).concat(this.anims.generateFrameNumbers('player-down', { start: 4, end: 6 })),
-    frameRate: 10,
-    repeat: -1,
+    frames: [
+      ...this.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
+      { key: 'player', frame: 0 },
+      ...this.anims.generateFrameNumbers('player', { start: 4, end: 6 }),
+    ],
+    frameRate: walkAnimFrameRate,
+    repeat: walkAnimRepeat,
   });
 
   this.anims.create({
     key: 'walk-left',
-    frames: this.anims.generateFrameNumbers('player-left', { start: 0, end: 3 }).concat({ key: 'player-left', frame: 0 }).concat(this.anims.generateFrameNumbers('player-left', { start: 4, end: 6 })),
-    frameRate: 10,
-    repeat: -1,
+    frames: [
+      ...this.anims.generateFrameNumbers('player', { start: 16, end: 19 }),
+      { key: 'player', frame: 16 },
+      ...this.anims.generateFrameNumbers('player', { start: 20, end: 22 }),
+    ],
+    frameRate: walkAnimFrameRate,
+    repeat: walkAnimRepeat,
   });
 
   this.anims.create({
     key: 'walk-up',
-    frames: this.anims.generateFrameNumbers('player-up', { start: 0, end: 3 }).concat({ key: 'player-up', frame: 0 }).concat(this.anims.generateFrameNumbers('player-up', { start: 4, end: 6 })),
-    frameRate: 10,
-    repeat: -1,
+    frames: [
+      ...this.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
+      { key: 'player', frame: 8 },
+      ...this.anims.generateFrameNumbers('player', { start: 12, end: 14 }),
+    ],
+    frameRate: walkAnimFrameRate,
+    repeat: walkAnimRepeat,
   });
 
   this.anims.create({
     key: 'idle',
-    frames: [{ key: 'player-down', frame: 0 }],
+    frames: [{ key: 'player', frame: 0 }],
   });
 
   // this.cameras.main.setZoom(1.25);
