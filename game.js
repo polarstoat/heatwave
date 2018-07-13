@@ -95,11 +95,7 @@ function create() {
   this.physics.world.bounds.width = 3000;
   this.physics.world.bounds.height = 2000;
 
-  // this.cameras.main.setZoom(1.25);
-
   this.cameras.main.startFollow(player, true, 0.05, 0.05);
-
-  // console.dir(this.cameras.main);
 }
 
 function update() {
@@ -137,11 +133,13 @@ function update() {
 // eslint-disable-next-line no-unused-vars
 const game = new Phaser.Game({
   type: Phaser.AUTO,
-  width: 800,
-  height: 600,
+  width: 600,
+  height: 450,
   physics: {
     default: 'arcade',
   },
+  pixelArt: true,
+  zoom: 1.5,
   scene: {
     preload,
     create,
