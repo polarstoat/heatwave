@@ -15,7 +15,7 @@ function preload() {
 
 // 'self' is the Phaser scene we attach the animations to
 function defineAnimations(self) {
-  const walkAnimFrameRate = 10;
+  const walkAnimFrameRate = 16;
 
   self.anims.create({
     key: 'player-walk-down',
@@ -110,7 +110,7 @@ function update() {
   const { player } = this;
   const cursors = this.input.keyboard.createCursorKeys();
 
-  const speed = 120;
+  const speed = 180;
 
   if (cursors.left.isDown) {
     player.setVelocityX(speed * -1);
