@@ -2,6 +2,8 @@ function preload() {
   // Load sprites
   this.load.image('background', 'sprites/background.png');
 
+  this.load.image('blue', 'sprites/blue.png');
+
   this.load.spritesheet('player', 'sprites/player.png', {
     frameWidth: 64,
     frameHeight: 96,
@@ -94,16 +96,24 @@ function create() {
     child.anims.play('plant-alive', false, Phaser.Math.Between(0, 2));
   });
 
+  const particles = this.add.particles('blue');
+  const emitter = particles.createEmitter({
+    speed: 100,
+    scale: {
+      start: 1,
+      end: 0,
+    },
+  });
+
   this.player = this.physics.add.sprite(0, 0, 'player-idle');
   const { player } = this;
 
   player.setCollideWorldBounds(true);
-
   this.physics.world.setBounds(-1500, -1000, 3000, 2000);
-
   this.cameras.main.setBounds(-1500, -1000, 3000, 2000);
 
   this.cameras.main.startFollow(player, true, 0.05, 0.05);
+  emitter.startFollow(player);
 }
 
 function update() {
