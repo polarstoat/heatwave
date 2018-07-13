@@ -83,23 +83,25 @@ function create() {
 
   this.add.image(0, 0, 'background');
 
-  this.physics.add.sprite(400, 400, 'plant').anims.play('plant-alive');
-  this.physics.add.sprite(130, 80, 'plant').anims.play('plant-alive');
-  this.physics.add.sprite(166, 611, 'plant').anims.play('plant-alive');
-  this.physics.add.sprite(330, -122, 'plant').anims.play('plant-alive');
-  this.physics.add.sprite(831, 10, 'plant').anims.play('plant-alive');
-  this.physics.add.sprite(83, 300, 'plant').anims.play('plant-alive');
-  this.physics.add.sprite(300, 10, 'plant').anims.play('plant-wilt');
-  this.physics.add.sprite(250, 500, 'plant').anims.play('plant-wilt');
-  this.physics.add.sprite(140, 410, 'plant').anims.play('plant-dead');
+  const plants = this.physics.add.group({
+    key: 'plant',
+    repeat: 100,
+  });
+
+  plants.children.iterate((child) => {
+    child.setX(Phaser.Math.Between(-1500, 1500));
+    child.setY(Phaser.Math.Between(-1000, 1000));
+    child.anims.play('plant-alive', false, Phaser.Math.Between(0, 2));
+  });
 
   this.player = this.physics.add.sprite(0, 0, 'player-idle');
   const { player } = this;
 
   player.setCollideWorldBounds(true);
 
-  // this.physics.world.bounds.width = 3000;
-  // this.physics.world.bounds.height = 2000;
+  this.physics.world.setBounds(-1500, -1000, 3000, 2000);
+
+  this.cameras.main.setBounds(-1500, -1000, 3000, 2000);
 
   this.cameras.main.startFollow(player, true, 0.05, 0.05);
 }
