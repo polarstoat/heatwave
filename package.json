@@ -27,5 +27,6 @@
     "eslint-plugin-import": "^2.13.0",
     "markdown-link-check": "^3.6.2"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "private": true
 }
