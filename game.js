@@ -13,8 +13,6 @@ function preload() {
   });
 }
 
-let player;
-
 function create() {
   // Define animations
   const walkAnimFrameRate = 10;
@@ -89,7 +87,9 @@ function create() {
   this.physics.add.sprite(250, 500, 'plant').anims.play('plant-wilt');
   this.physics.add.sprite(140, 410, 'plant').anims.play('plant-dead');
 
-  player = this.physics.add.sprite(200, 200, 'player-idle');
+  this.player = this.physics.add.sprite(200, 200, 'player-idle');
+  const { player } = this;
+
   player.setCollideWorldBounds(true);
 
   this.physics.world.bounds.width = 3000;
@@ -103,6 +103,7 @@ function create() {
 }
 
 function update() {
+  const { player } = this;
   const cursors = this.input.keyboard.createCursorKeys();
 
   const speed = 120;
