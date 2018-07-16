@@ -79,6 +79,13 @@ function defineAnimations(self) {
   });
 }
 
+class Plant extends Phaser.GameObjects.Sprite {
+  randomiseLocation() {
+    this.setX(Phaser.Math.Between(-1500, 1500));
+    this.setY(Phaser.Math.Between(-1000, 1000));
+  }
+}
+
 function create() {
   // Define animations
   defineAnimations(this);
@@ -86,13 +93,13 @@ function create() {
   this.add.image(0, 0, 'background');
 
   const plants = this.physics.add.group({
+    classType: Plant,
     key: 'plant',
     repeat: 100,
   });
 
   plants.children.iterate((child) => {
-    child.setX(Phaser.Math.Between(-1500, 1500));
-    child.setY(Phaser.Math.Between(-1000, 1000));
+    child.randomiseLocation();
     child.anims.play('plant-alive', false, Phaser.Math.Between(0, 2));
   });
 
