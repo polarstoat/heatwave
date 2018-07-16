@@ -80,9 +80,39 @@ function defineAnimations(self) {
 }
 
 class Plant extends Phaser.GameObjects.Sprite {
+  static get WILT_TEMPERATURE() { return 1000; }
+
+  static get DIE_TEMPERATURE() { return 10000; }
+
+  constructor(scene, x, y, texture, frame) {
+    super(scene, x, y, 'plant', frame);
+
+    this.temperature = Phaser.Math.Between(0, 500);
+
+    this.anims.play('plant-alive', false, Phaser.Math.Between(0, 2));
+  }
+
   randomiseLocation() {
     this.setX(Phaser.Math.Between(-1500, 1500));
     this.setY(Phaser.Math.Between(-1000, 1000));
+  }
+
+  increaseTemperature() {
+    this.temperature += 1;
+
+    if (this.temperature >= Plant.WILT_TEMPERATURE) {
+      this.wilt();
+    } else if (this.temperature >= Plant.DIE_TEMPERATURE) {
+      this.die();
+    }
+  }
+
+  wilt() {
+    this.anims.play('plant-wilt', true);
+  }
+
+  die() {
+    this.anims.play('plant-dead');
   }
 }
 
@@ -92,15 +122,14 @@ function create() {
 
   this.add.image(0, 0, 'background');
 
-  const plants = this.physics.add.group({
+  this.plants = this.physics.add.group({
     classType: Plant,
     key: 'plant',
     repeat: 100,
   });
 
-  plants.children.iterate((child) => {
+  this.plants.children.iterate((child) => {
     child.randomiseLocation();
-    child.anims.play('plant-alive', false, Phaser.Math.Between(0, 2));
   });
 
   const particles = this.add.particles('blue');
@@ -162,6 +191,11 @@ function update() {
   } else {
     player.waterParticlesEmitter.stop();
   }
+
+  // Increase plant temperature
+  this.plants.children.iterate((plant) => {
+    plant.increaseTemperature();
+  });
 }
 
 // eslint-disable-next-line no-unused-vars
