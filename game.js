@@ -128,8 +128,8 @@ function create() {
     repeat: 100,
   });
 
-  this.plants.children.iterate((child) => {
-    child.randomiseLocation();
+  this.plants.children.iterate((plant) => {
+    plant.randomiseLocation();
   });
 
   const particles = this.add.particles('blue');
@@ -183,7 +183,6 @@ function update() {
     player.setVelocityX(0);
     player.setVelocityY(0);
     player.anims.play('player-idle');
-    // this.cameras.main.shake(500);
   }
 
   if (cursors.space.isDown) {
