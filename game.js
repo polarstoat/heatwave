@@ -1,7 +1,10 @@
+/**
+ * Preload image assets
+ */
 function preload() {
-  // Load sprites
   this.load.image('background', 'sprites/background.png');
 
+  // This is a placeholder sprite for a water particle
   this.load.image('blue', 'sprites/blue.png');
 
   this.load.spritesheet('player', 'sprites/player.png', {
@@ -15,8 +18,12 @@ function preload() {
   });
 }
 
-// 'self' is the Phaser scene we attach the animations to
+/**
+ * Define the animations of sprites to Phaser
+ * @param  {Phaser.Scene} self A reference to the Phaser scene
+ */
 function defineAnimations(self) {
+  // Player animations
   const walkAnimFrameRate = 16;
 
   self.anims.create({
@@ -57,6 +64,7 @@ function defineAnimations(self) {
     frames: [{ key: 'player', frame: 0 }],
   });
 
+  // Plant animations
   const plantAnimFrameRate = 5;
 
   self.anims.create({
@@ -79,11 +87,29 @@ function defineAnimations(self) {
   });
 }
 
+/**
+ * Class representing a plant
+ * @extends Phaser.GameObjects.Sprite
+ */
 class Plant extends Phaser.GameObjects.Sprite {
+  /**
+   * @return {number} Temperature plants wilt at
+   */
   static get WILT_TEMPERATURE() { return 1500; }
 
+  /**
+   * @return {number} Temperature plants die at
+   */
   static get DIE_TEMPERATURE() { return 10000; }
 
+  /**
+   * Create a plant
+   * @param  {Phaser.Scene} scene   The Phaser scene the plant is in
+   * @param  {number} x       The horizontal position of the plant
+   * @param  {number} y       The vertical position of the plant
+   * @param  {string} texture The key of the Phaser texture
+   * @param  {string|number} [frame]   The frame of the texture
+   */
   constructor(scene, x, y, texture, frame) {
     super(scene, x, y, 'plant', frame);
 
@@ -92,11 +118,17 @@ class Plant extends Phaser.GameObjects.Sprite {
     this.anims.play('plant-alive', false, Phaser.Math.Between(0, 2));
   }
 
-  randomiseLocation() {
+  /**
+   * Randomises the plant's position
+   */
+  randomisePosition() {
     this.setX(Phaser.Math.Between(-1500, 1500));
     this.setY(Phaser.Math.Between(-1000, 1000));
   }
 
+  /**
+   * Increases the plant's temperature, and calls Plant.wilt() or Plant.die() if neccesary
+   */
   increaseTemperature() {
     this.temperature += 1;
 
@@ -107,31 +139,43 @@ class Plant extends Phaser.GameObjects.Sprite {
     }
   }
 
+  /**
+   * Wilt the plant
+   */
   wilt() {
     this.anims.play('plant-wilt', true);
   }
 
+  /**
+   * Kill the plant
+   */
   die() {
     this.anims.play('plant-dead');
   }
 }
 
+/**
+ * Populate the Phaser scene
+ */
 function create() {
-  // Define animations
+  // Load in animations, passing the scene
   defineAnimations(this);
 
   this.add.image(0, 0, 'background');
 
+  // Create a group of 100 Plants, with physics enabled
   this.plants = this.physics.add.group({
     classType: Plant,
     key: 'plant',
     repeat: 100,
   });
 
+  // Randomise each plant's position
   this.plants.children.iterate((plant) => {
-    plant.randomiseLocation();
+    plant.randomisePosition();
   });
 
+  // Water particle emitter, defaulting to off
   const particles = this.add.particles('blue');
   const emitter = particles.createEmitter({
     speed: 100,
@@ -143,55 +187,79 @@ function create() {
   });
 
   this.player = this.physics.add.sprite(0, 0, 'player-idle');
-  const { player } = this;
+  this.player.speed = 180;
 
-  player.setCollideWorldBounds(true);
+  // Set bounds of the world and the camera
   this.physics.world.setBounds(-1500, -1000, 3000, 2000);
   this.cameras.main.setBounds(-1500, -1000, 3000, 2000);
 
-  this.cameras.main.startFollow(player, true, 0.05, 0.05);
-  emitter.startFollow(player);
+  this.player.setCollideWorldBounds(true);
 
-  player.waterParticlesEmitter = emitter;
+  // Set camera to follow player
+  this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
+
+  // Set water particle emitter to follow player
+  emitter.startFollow(this.player);
+
+  this.player.waterParticlesEmitter = emitter;
 }
 
+/**
+ * Called about 60 times per second
+ * @param {number} time
+ * @param {number} delta
+ */
 function update() {
+  // Shorthand reference to the player
   const { player } = this;
+
+  // Shorthand refernce to control keys
   const cursors = this.input.keyboard.createCursorKeys();
 
-  const speed = 180;
+  // Player movement. There is surely a better way to do this.
 
+  // Left
   if (cursors.left.isDown) {
-    player.setVelocityX(speed * -1);
+    player.setVelocityX(player.speed * -1);
     player.setVelocityY(0);
+
     player.anims.play('player-walk-left', true);
     player.flipX = false;
+  // Right
   } else if (cursors.right.isDown) {
-    player.setVelocityX(speed);
+    player.setVelocityX(player.speed);
     player.setVelocityY(0);
+
     player.anims.play('player-walk-left', true);
     player.flipX = true;
+  // Down
   } else if (cursors.down.isDown) {
-    player.setVelocityY(speed);
+    player.setVelocityY(player.speed);
     player.setVelocityX(0);
+
     player.anims.play('player-walk-down', true);
+  // Up
   } else if (cursors.up.isDown) {
-    player.setVelocityY(speed * -1);
+    player.setVelocityY(player.speed * -1);
     player.setVelocityX(0);
+
     player.anims.play('player-walk-up', true);
+  // No arrow keys
   } else {
     player.setVelocityX(0);
     player.setVelocityY(0);
+
     player.anims.play('player-idle');
   }
 
+  // Spacebar (water) controls
   if (cursors.space.isDown) {
     player.waterParticlesEmitter.start();
   } else {
     player.waterParticlesEmitter.stop();
   }
 
-  // Increase plant temperature
+  // Increase plants temperature
   this.plants.children.iterate((plant) => {
     plant.increaseTemperature();
   });
