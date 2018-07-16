@@ -80,14 +80,14 @@ function defineAnimations(self) {
 }
 
 class Plant extends Phaser.GameObjects.Sprite {
-  static get WILT_TEMPERATURE() { return 1000; }
+  static get WILT_TEMPERATURE() { return 1500; }
 
   static get DIE_TEMPERATURE() { return 10000; }
 
   constructor(scene, x, y, texture, frame) {
     super(scene, x, y, 'plant', frame);
 
-    this.temperature = Phaser.Math.Between(0, 500);
+    this.temperature = Phaser.Math.Between(0, 1000);
 
     this.anims.play('plant-alive', false, Phaser.Math.Between(0, 2));
   }
