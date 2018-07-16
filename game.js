@@ -110,6 +110,7 @@ function create() {
       start: 1,
       end: 0,
     },
+    on: false,
   });
 
   this.player = this.physics.add.sprite(0, 0, 'player-idle');
@@ -121,6 +122,8 @@ function create() {
 
   this.cameras.main.startFollow(player, true, 0.05, 0.05);
   emitter.startFollow(player);
+
+  player.waterParticlesEmitter = emitter;
 }
 
 function update() {
@@ -152,6 +155,12 @@ function update() {
     player.setVelocityY(0);
     player.anims.play('player-idle');
     // this.cameras.main.shake(500);
+  }
+
+  if (cursors.space.isDown) {
+    player.waterParticlesEmitter.start();
+  } else {
+    player.waterParticlesEmitter.stop();
   }
 }
 
