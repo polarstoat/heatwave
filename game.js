@@ -95,12 +95,12 @@ class Plant extends Phaser.GameObjects.Sprite {
   /**
    * @return {number} Temperature plants wilt at
    */
-  static get WILT_TEMPERATURE() { return 1500; }
+  static get WILT_TEMPERATURE() { return 2000; }
 
   /**
    * @return {number} Temperature plants die at
    */
-  static get DIE_TEMPERATURE() { return 10000; }
+  static get DIE_TEMPERATURE() { return 5000; }
 
   /**
    * Create a plant
@@ -113,7 +113,7 @@ class Plant extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, texture, frame) {
     super(scene, x, y, 'plant', frame);
 
-    this.temperature = Phaser.Math.Between(0, 1000);
+    this.temperature = Phaser.Math.Between(0, 1500);
 
     this.anims.play('plant-alive', false, Phaser.Math.Between(0, 2));
   }
