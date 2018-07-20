@@ -132,11 +132,11 @@ class Plant extends Phaser.GameObjects.Sprite {
    * @param  {string|number} [frame]   The frame of the texture
    */
   constructor(scene, x, y, texture, frame) {
-    super(scene, x, y, 'plant', frame);
+    super(scene, x, y, Phaser.Math.Between(0, 1) === 0 ? 'plant' : 'tree', frame);
 
     this.temperature = Phaser.Math.Between(0, 1500);
 
-    this.anims.play('plant-alive', false, Phaser.Math.Between(0, 2));
+    this.anims.play(`${this.texture.key}-alive`, false, Phaser.Math.Between(0, 2));
   }
 
   /**
@@ -164,14 +164,14 @@ class Plant extends Phaser.GameObjects.Sprite {
    * Wilt the plant
    */
   wilt() {
-    this.anims.play('plant-wilt', true);
+    this.anims.play(`${this.texture.key}-wilt`, true);
   }
 
   /**
    * Kill the plant
    */
   die() {
-    this.anims.play('plant-dead');
+    this.anims.play(`${this.texture.key}-dead`);
   }
 }
 
