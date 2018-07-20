@@ -28,33 +28,27 @@ function defineAnimations(self) {
 
   self.anims.create({
     key: 'player-walk-down',
-    frames: [
-      ...self.anims.generateFrameNumbers('player', { start: 0, end: 3 }),
-      { key: 'player', frame: 0 },
-      ...self.anims.generateFrameNumbers('player', { start: 4, end: 6 }),
-    ],
+    frames: self.anims.generateFrameNumbers('player', {
+      frames: [0, 1, 2, 3, 0, 4, 5, 6],
+    }),
     frameRate: walkAnimFrameRate,
     repeat: -1,
   });
 
   self.anims.create({
     key: 'player-walk-left',
-    frames: [
-      ...self.anims.generateFrameNumbers('player', { start: 16, end: 19 }),
-      { key: 'player', frame: 16 },
-      ...self.anims.generateFrameNumbers('player', { start: 20, end: 22 }),
-    ],
+    frames: self.anims.generateFrameNumbers('player', {
+      frames: [16, 17, 18, 19, 16, 20, 21, 22],
+    }),
     frameRate: walkAnimFrameRate,
     repeat: -1,
   });
 
   self.anims.create({
     key: 'player-walk-up',
-    frames: [
-      ...self.anims.generateFrameNumbers('player', { start: 8, end: 11 }),
-      { key: 'player', frame: 8 },
-      ...self.anims.generateFrameNumbers('player', { start: 12, end: 14 }),
-    ],
+    frames: self.anims.generateFrameNumbers('player', {
+      frames: [8, 9, 10, 11, 8, 12, 13, 14],
+    }),
     frameRate: walkAnimFrameRate,
     repeat: -1,
   });
