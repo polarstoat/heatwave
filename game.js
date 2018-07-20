@@ -153,10 +153,10 @@ class Plant extends Phaser.GameObjects.Sprite {
   increaseTemperature() {
     this.temperature += 1;
 
-    if (this.temperature >= Plant.WILT_TEMPERATURE) {
-      this.wilt();
-    } else if (this.temperature >= Plant.DIE_TEMPERATURE) {
+    if (this.temperature >= Plant.DIE_TEMPERATURE) {
       this.die();
+    } else if (this.temperature >= Plant.WILT_TEMPERATURE) {
+      this.wilt();
     }
   }
 
