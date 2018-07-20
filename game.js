@@ -16,6 +16,11 @@ function preload() {
     frameWidth: 96,
     frameHeight: 96,
   });
+
+  this.load.spritesheet('tree', 'sprites/tree.png', {
+    frameWidth: 128,
+    frameHeight: 128,
+  });
 }
 
 /**
@@ -78,6 +83,28 @@ function defineAnimations(self) {
   self.anims.create({
     key: 'plant-dead',
     frames: [{ key: 'plant', frame: 6 }],
+  });
+
+  // Tree animations
+  self.anims.create({
+    key: 'tree-alive',
+    frames: self.anims.generateFrameNumbers('tree', {
+      frames: [0, 1, 0, 2],
+    }),
+    frameRate: plantAnimFrameRate,
+    repeat: -1,
+  });
+
+  self.anims.create({
+    key: 'tree-wilt',
+    frames: self.anims.generateFrameNumbers('tree', { start: 3, end: 5 }),
+    frameRate: plantAnimFrameRate,
+    repeat: -1,
+  });
+
+  self.anims.create({
+    key: 'tree-dead',
+    frames: [{ key: 'tree', frame: 6 }],
   });
 }
 
